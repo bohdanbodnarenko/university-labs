@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
+
 import { User, UserRoles } from "../../entity/User";
 import { Student } from "../../entity/Student";
-import { validUserSchema } from "../../validations";
+import { validUserSchema, validStudentSchema } from "../../validations";
 import { formatYupError } from "../../utils/formatYupError";
-import { validStudentSchema } from "../../validations/validStudentSchema";
 
 export const studentById = async (
   req: Request & any,

@@ -3,31 +3,27 @@ import * as rp from "request-promise";
 
 import { User } from "../../entity/User";
 import { createTypeormConn } from "../../utils/createTypeormConn";
-import { Student } from "../../entity/Student";
+import { Teacher } from "../../entity/Teacher";
 
 const host = process.env.API_BASE || "http://localhost:4000";
 
-const email = "student@test.com",
+const email = "teacher@teacher.com",
   password = faker.internet.password(),
   name = faker.internet.userName(),
-  specialization = "testSpecialization",
-  group = "testGroup",
-  faculty = "testFaculty";
+  position = "testPosition";
 
 beforeAll(async () => {
   await createTypeormConn();
 });
 
-describe("Register student", () => {
-  it("register a new student", async () => {
-    const response = await rp.post(`${host}/student`, {
+describe("Register teacher", () => {
+  it("register a new teacher", async () => {
+    const response = await rp.post(`${host}/teacher`, {
       withCredentials: true,
       json: true,
       body: {
         user: { email, password, name, surname: name },
-        specialization,
-        group,
-        faculty
+        position
       }
     });
     expect(response).toEqual(true);
@@ -36,37 +32,18 @@ describe("Register student", () => {
     const user = users[0];
     expect(user.password).not.toEqual(password);
 
-    const students = await Student.find({ where: { userId: user.id } });
-    expect(students).toHaveLength(1);
-  });
-
-  it("check for duplicate email", async () => {
-    try {
-      await rp.post(`${host}/student`, {
-        withCredentials: true,
-        json: true,
-        body: {
-          user: { email, password, name, surname: name },
-          specialization,
-          group,
-          faculty
-        }
-      });
-    } catch (error) {
-      expect(error.statusCode).toEqual(403);
-    }
+    const teachers = await Teacher.find({ where: { userId: user.id } });
+    expect(teachers).toHaveLength(1);
   });
 
   it("check bad email", async () => {
     try {
-      await rp.post(`${host}/student`, {
+      await rp.post(`${host}/teacher`, {
         withCredentials: true,
         json: true,
         body: {
           user: { email: "bla", password, name, surname: name },
-          specialization,
-          group,
-          faculty
+          position
         }
       });
     } catch (error) {
@@ -76,7 +53,7 @@ describe("Register student", () => {
 
   it("check bad password", async () => {
     try {
-      await rp.post(`${host}/student`, {
+      await rp.post(`${host}/teacher`, {
         withCredentials: true,
         json: true,
         body: {
@@ -86,9 +63,7 @@ describe("Register student", () => {
             name,
             surname: name
           },
-          specialization,
-          group,
-          faculty
+          position
         }
       });
     } catch (error) {
