@@ -10,7 +10,3 @@ gulp.task("apidoc", done => {
     done
   );
 });
-
-gulp.task("watch", () => {
-  gulp.watch(["./routes/**"], ["apidoc"]);
-});

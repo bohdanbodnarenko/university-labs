@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { User } from "../entity/User_account";
+import { User } from "../entity/User";
 
 export const authMiddleware = async (
   req: Request & any,
