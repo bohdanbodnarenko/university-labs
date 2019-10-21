@@ -1,17 +1,21 @@
 import * as yup from "yup";
 
+const email = yup
+  .string()
+  .min(3)
+  .max(255)
+  .email()
+  .required();
+
+const password = yup
+  .string()
+  .min(3)
+  .max(255)
+  .required();
+
 export const validUserSchema = yup.object().shape({
-  email: yup
-    .string()
-    .min(3)
-    .max(255)
-    .email()
-    .required(),
-  password: yup
-    .string()
-    .min(3)
-    .max(255)
-    .required(),
+  email,
+  password,
   name: yup
     .string()
     .required()
@@ -25,16 +29,7 @@ export const validUserSchema = yup.object().shape({
   date_of_birth: yup.date()
 });
 
-export const loginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .min(3)
-    .max(255)
-    .email()
-    .required(),
-  password: yup
-    .string()
-    .min(3)
-    .max(255)
-    .required()
+export const validLoginSchema = yup.object().shape({
+  email,
+  password
 });

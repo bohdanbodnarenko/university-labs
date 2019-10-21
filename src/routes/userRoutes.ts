@@ -4,14 +4,17 @@ import {
   userById,
   getUser,
   getUsers,
-  deleteUser
+  deleteUser,
+  login
 } from "../controllers/";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
 export const userRouter = Router();
 
 userRouter.post("/", register);
-userRouter.get("/all", getUsers);
-userRouter.get("/:userId", getUser);
-userRouter.delete("/:userId", deleteUser);
+userRouter.post("/login", login);
+userRouter.get("/all", authMiddleware, getUsers);
+userRouter.get("/:userId", authMiddleware, getUser);
+userRouter.delete("/:userId", authMiddleware, deleteUser);
 
 userRouter.param("userId", userById);
