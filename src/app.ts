@@ -9,7 +9,6 @@ import helmet from "helmet";
 import { userRouter } from "./routes/userRoutes";
 import { createTypeormConn } from "./utils/createTypeormConn";
 dotenv.config();
-
 const startServer = async () => {
   const app = express();
 

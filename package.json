@@ -29,6 +29,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-apidoc": "^0.2.8",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
@@ -39,6 +41,16 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon --exec ts-node src/app.ts",
     "test-server": "NODE_ENV=test nodemon --exec ts-node src/app.ts",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "generate-doc": "gulp apidoc"
+  },
+  "apidoc": {
+    "name": "University Labs",
+    "version": "0.1.0",
+    "description": "University labs documentation",
+    "apidoc": {
+      "title": "Custom apiDoc browser title",
+      "url": "http://localhost:4000"
+    }
   }
 }

@@ -44,9 +44,7 @@ export const register = async (req: Request, res: Response) => {
   const user = User.create(body);
   await user.save();
 
-  user.password = undefined;
-  console.log(user);
-  res.json(user);
+  res.json(true);
 };
 
 export const getUser = (req: Request & any, res: Response) => {

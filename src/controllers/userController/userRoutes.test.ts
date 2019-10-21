@@ -4,7 +4,7 @@ import * as rp from "request-promise";
 import { User } from "../../entity/User_account";
 import { createTypeormConn } from "../../utils/createTypeormConn";
 
-const host = process.env.HOST || "http://localhost:4000";
+const host = process.env.API_BASE || "http://localhost:4000";
 
 const email = faker.internet.email();
 const password = faker.internet.password();
@@ -21,7 +21,7 @@ describe("Register user", () => {
       json: true,
       body: { email, password, name, surname: name }
     });
-    expect(response.email).toEqual(email);
+    expect(response).toEqual(true);
     const users = await User.find({ where: { email } });
     expect(users).toHaveLength(1);
     const user = users[0];
