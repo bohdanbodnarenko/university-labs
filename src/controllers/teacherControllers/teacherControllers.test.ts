@@ -58,7 +58,7 @@ describe("Register teacher", () => {
         json: true,
         body: {
           user: {
-            email: faker.internet.email(),
+            email: "teacher1@teacher.com",
             password: "bla",
             name,
             surname: name

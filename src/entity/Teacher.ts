@@ -4,10 +4,13 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-  BaseEntity
+  BaseEntity,
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 
 import { User } from "./User";
+import { FieldOfStudy } from "./FieldOfStudy";
 
 @Entity()
 export class Teacher extends BaseEntity {
@@ -17,10 +20,13 @@ export class Teacher extends BaseEntity {
   @Column("varchar", { length: 50 })
   position: string;
 
-  @Column("int", { nullable: true })
-  field_of_study_id: number;
+  @ManyToOne(() => FieldOfStudy, fieldOfStudy => fieldOfStudy.teachers)
+  fieldOfStudy: FieldOfStudy;
 
-  @OneToOne(() => User)
+  @Column("int", { nullable: true })
+  fieldOfStudyId: number;
+
+  @OneToOne(() => User, { onUpdate: "CASCADE", onDelete: "CASCADE" })
   @JoinColumn()
   user: User;
 

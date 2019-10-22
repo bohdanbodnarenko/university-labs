@@ -22,7 +22,7 @@ export class Student extends BaseEntity {
   @Column("varchar", { length: 20 })
   faculty: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { onUpdate: "CASCADE", onDelete: "CASCADE" })
   @JoinColumn()
   user: User;
 
