@@ -3,9 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  BeforeInsert
+  BeforeInsert,
+  ManyToMany
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
+
+import { Channel } from "./Channel";
+import { University } from "./University";
 
 export enum UserRoles {
   student = "student",
@@ -34,6 +38,12 @@ export class User extends BaseEntity {
 
   @Column("varchar", { length: 10, nullable: true })
   role: UserRoles;
+
+  @ManyToMany(() => Channel, channel => channel.users)
+  channels: Channel[];
+
+  @ManyToMany(() => University, university => university.users)
+  universities: University[];
 
   @BeforeInsert()
   async hashPasswordBeforeInsert() {

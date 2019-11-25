@@ -1,20 +1,30 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  BaseEntity
+} from "typeorm";
+import { Teacher } from "./Teacher";
+import { Channel } from "./Channel";
 
 @Entity()
-export class Post {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class Post extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column("text")
-    text: string;
+  @Column("text")
+  text: string;
 
-    // @Column('date', {default: Date.now()})
-    // timestamp: number;
+  @Column("date")
+  timestamp: number;
 
-    @Column('int')
-    channel_id: number;
+  @Column("int")
+  channel_id: number;
 
-    @Column('int')
-    owner_id: number;
+  @ManyToOne(() => Teacher, teacher => teacher.posts)
+  owner: Teacher;
 
+  @ManyToOne(() => Channel, channel => channel.posts)
+  channel: Channel;
 }

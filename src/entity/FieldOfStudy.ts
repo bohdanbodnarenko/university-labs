@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 
 import { Teacher } from "./Teacher";
+import { Channel } from "./Channel";
 
 @Entity("field_of_study")
 export class FieldOfStudy extends BaseEntity {
@@ -18,4 +19,7 @@ export class FieldOfStudy extends BaseEntity {
 
   @OneToMany(() => Teacher, teacher => teacher.fieldOfStudy)
   teachers: Teacher[];
+
+  @OneToMany(() => Channel, channel => channel.fieldOfStudy)
+  channels: Channel[];
 }
