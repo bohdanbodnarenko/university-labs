@@ -44,17 +44,17 @@ export const registerTeacher = async (req: Request, res: Response) => {
     ]);
   }
   const newUser: User = User.create({ ...user, role: UserRoles.teacher });
-  await newUser.save();
 
   try {
     await validTeacherSchema.validate(teacher, { abortEarly: false });
   } catch (err) {
     return res.status(400).json(formatYupError(err));
   }
+  await newUser.save();
   teacher.userId = newUser.id;
   await Teacher.create(teacher).save();
 
-  res.json(true);
+  res.json({ message: "Teacher registered successfully" });
 };
 
 export const getTeacher = (req: Request & any, res: Response) => {

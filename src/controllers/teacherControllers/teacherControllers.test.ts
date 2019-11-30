@@ -4,6 +4,7 @@ import * as rp from "request-promise";
 import { User } from "../../entity/User";
 import { createTypeormConn } from "../../utils/createTypeormConn";
 import { Teacher } from "../../entity/Teacher";
+import { FieldOfStudy } from "../../entity/FieldOfStudy";
 
 const host = process.env.API_BASE || "http://localhost:4000";
 
@@ -14,6 +15,7 @@ const email = "teacher@teacher.com",
 
 beforeAll(async () => {
   await createTypeormConn();
+  await FieldOfStudy.create({ name: "TestField" }).save();
 });
 
 describe("Register teacher", () => {
@@ -23,10 +25,13 @@ describe("Register teacher", () => {
       json: true,
       body: {
         user: { email, password, name, surname: name },
-        position
+        position,
+        fieldOfStudyId: 1
       }
     });
-    expect(response).toEqual(true);
+    expect(response).toEqual({
+      message: "Teacher registered successfully"
+    });
     const users = await User.find({ where: { email } });
     expect(users).toHaveLength(1);
     const user = users[0];

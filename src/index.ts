@@ -8,6 +8,8 @@ import { createTypeormConn } from "./utils/createTypeormConn";
 import { studentRouter } from "./routes/studentRoutes";
 import { authRouter } from "./routes/authRoutes";
 import { teacherRouter } from "./routes/teacherRoutes";
+import { channelRouter } from "./routes/channelRoutes";
+import { postRoutes } from "./routes/postRoutes";
 
 dotenv.config();
 const startServer = async () => {
@@ -20,6 +22,8 @@ const startServer = async () => {
   app.use("/", authRouter);
   app.use("/student", studentRouter);
   app.use("/teacher", teacherRouter);
+  app.use("/channel", channelRouter);
+  app.use("/post", postRoutes);
 
   await createTypeormConn();
   const port = process.env.PORT || 4000;

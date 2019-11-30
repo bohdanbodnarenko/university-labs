@@ -17,7 +17,7 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = body;
   let user: User & any = await User.findOne({ email });
   if (!user) {
-    res.status(404).json({
+    return res.status(404).json({
       path: "email",
       message: "User with this email does not exits, please sign up"
     });
@@ -25,7 +25,9 @@ export const login = async (req: Request, res: Response) => {
   const isValid = await compare(password, user.password);
 
   if (!isValid) {
-    res.status(400).json({ path: "password", message: "Wrong password" });
+    return res
+      .status(400)
+      .json({ path: "password", message: "Wrong password" });
   }
 
   if (user.role === UserRoles.student) {

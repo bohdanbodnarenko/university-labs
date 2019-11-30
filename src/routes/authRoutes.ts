@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { login } from "../controllers/";
+import { channelRouter } from "./channelRoutes";
 
 export const authRouter = Router();
 
@@ -42,3 +43,6 @@ export const authRouter = Router();
 }
  */
 authRouter.post("/login", login);
+
+//doc
+

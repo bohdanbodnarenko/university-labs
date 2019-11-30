@@ -14,13 +14,10 @@ export class Post extends BaseEntity {
   id: number;
 
   @Column("text")
-  text: string;
+  content: string;
 
   @Column("date")
-  timestamp: number;
-
-  @Column("int")
-  channel_id: number;
+  timestamp: Date;
 
   @ManyToOne(() => Teacher, teacher => teacher.posts)
   owner: Teacher;

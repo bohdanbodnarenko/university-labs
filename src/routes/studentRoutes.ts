@@ -20,7 +20,7 @@ studentRouter.param("studentId", studentById);
  * @apiParam {String} email Student email
  * @apiParam {String} password Student password
  * @apiParam {String} specialization Student specialization
- * @apiParam {Date} date_of_birth Students date_of_birth
+ * @apiParam {Date} date_of_birth Students date of birth
  * @apiSuccess {Boolean} registered is registration success
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
@@ -43,16 +43,15 @@ studentRouter.post("/", registerStudent);
  * @apiSuccess {String} name Student name
  * @apiSuccess {String} surname Student surname
  * @apiSuccess {String} email Student email
- * @apiSuccess {String} faculty
- * @apiSuccess {String} group
- * @apiSuccess {String} specialization
+ * @apiSuccess {String} faculty Student faculty
+ * @apiSuccess {String} group Student group
+ * @apiSuccess {String} specialization Student spesialization
  * @apiSuccess {Date} date_of_birth Students date_of_birth
  * @apiHeader {String} Authorization Students unique token.
  * @apiHeaderExample {json} Header-Example:
  *     {
  *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTcxNjQ2NTkwLCJleHAiOjE1NzE4MTkzOTB9.NH1AdNE5SVR7yHSo5aDcOLq_8z_XcOh7iM8mn3rNCgo"
  *     }
- * @apiPrivate
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
  *    [
@@ -88,6 +87,7 @@ studentRouter.post("/", registerStudent);
     }
 ]
  * @apiErrorExample {json} List error
+ *    HTTP/1.1 403 FAIL
  *    {
         "error": "Not authorized to access this resource"
       }
@@ -95,9 +95,9 @@ studentRouter.post("/", registerStudent);
 studentRouter.get("/all", authMiddleware, getStudents);
 
 /**
- * @api {get} /student/:userId Find a student by studentId
+ * @api {get} /student/:studentId Find a student by studentId
  * @apiGroup student
- * @apiParam {studentId} studentId User id
+ * @apiParam {studentId} studentId Teacher id
  * @apiSuccess {Number} id Student id
  * @apiSuccess {String} name Student name
  * @apiSuccess {String} surname Student surname
@@ -108,7 +108,6 @@ studentRouter.get("/all", authMiddleware, getStudents);
  *     {
  *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTcxNjQ2NTkwLCJleHAiOjE1NzE4MTkzOTB9.NH1AdNE5SVR7yHSo5aDcOLq_8z_XcOh7iM8mn3rNCgo"
  *     }
- * @apiPrivate
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
  *  {
@@ -128,5 +127,6 @@ studentRouter.get("/all", authMiddleware, getStudents);
     }
  * @apiErrorExample {json} User not found
  *    HTTP/1.1 404 Not Found
+ *    { error: "Student not found" }
  */
 studentRouter.get("/:studentId", authMiddleware, getStudent);

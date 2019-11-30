@@ -1,7 +1,7 @@
 {
   "name": "university-labs",
   "version": "0.0.1",
-  "main": "app.ts",
+  "main": "index.ts",
   "author": "bogdanbodnarenko",
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
@@ -38,8 +38,8 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development nodemon --exec ts-node src/app.ts",
-    "test-server": "NODE_ENV=test nodemon --exec ts-node src/app.ts",
+    "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
+    "test-server": "NODE_ENV=test nodemon --exec ts-node src/index.ts",
     "test": "NODE_ENV=test jest",
     "generate-doc": "gulp apidoc"
   },
