@@ -9,7 +9,7 @@ export const createFieldOfStudy = async(req:Request,res:Response) => {
     const {name} = req.body;
     const names = await FieldOfStudy.find({select:['name']})
     
-    if (names.includes(name)) {
+    if (names.map(({name})=>name).includes(name)) {
         return res.status(404).json({error:'This field of study already exists'})
     }
 
