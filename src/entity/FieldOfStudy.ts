@@ -14,7 +14,7 @@ export class FieldOfStudy extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("varchar", { length: 100 })
+  @Column("varchar", { length: 100, unique:true })
   name: string;
 
   @OneToMany(() => Teacher, teacher => teacher.fieldOfStudy)
