@@ -14,5 +14,5 @@ export const createFieldOfStudy = async(req:Request,res:Response) => {
     }
 
     const newFieldOfStudy = await FieldOfStudy.create({name}).save()
-    res.json(200).json(newFieldOfStudy)
+    res.status(200).json(newFieldOfStudy)
 }
