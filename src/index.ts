@@ -1,7 +1,9 @@
 import "reflect-metadata";
-import express from "express";
+import "reflect-metadata";
+import express, { Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import path from "path";
 import cors from "cors";
 
 import { createTypeormConn } from "./utils/createTypeormConn";
@@ -10,6 +12,7 @@ import { authRouter } from "./routes/authRoutes";
 import { teacherRouter } from "./routes/teacherRoutes";
 import { channelRouter } from "./routes/channelRoutes";
 import { postRoutes } from "./routes/postRoutes";
+import { fieldOfStudyRouter } from "./routes/fieldOfStudyRoutes";
 
 dotenv.config();
 const startServer = async () => {
@@ -23,7 +26,12 @@ const startServer = async () => {
   app.use("/student", studentRouter);
   app.use("/teacher", teacherRouter);
   app.use("/channel", channelRouter);
+  app.use("/fos", fieldOfStudyRouter);
   app.use("/post", postRoutes);
+
+  app.get("/docs", (_, res: Response) => {
+    res.sendFile(path.join(__dirname + "/docs/index.html"));
+  });
 
   await createTypeormConn();
   const port = process.env.PORT || 4000;

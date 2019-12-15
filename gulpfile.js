@@ -5,7 +5,7 @@ gulp.task("apidoc", done => {
   apidoc(
     {
       src: "./src/routes",
-      dest: "./docs"
+      dest: "./src/docs"
     },
     done
   );
