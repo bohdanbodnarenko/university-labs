@@ -13,6 +13,7 @@ import { teacherRouter } from "./routes/teacherRoutes";
 import { channelRouter } from "./routes/channelRoutes";
 import { postRoutes } from "./routes/postRoutes";
 import { fieldOfStudyRouter } from "./routes/fieldOfStudyRoutes";
+import { FieldOfStudy } from "./entity/FieldOfStudy";
 
 dotenv.config();
 const startServer = async () => {
@@ -32,6 +33,8 @@ const startServer = async () => {
   app.get("/docs", (_, res: Response) => {
     res.sendFile(path.join(__dirname + "/docs/index.html"));
   });
+
+  await FieldOfStudy.clear()
 
   await createTypeormConn();
   const port = process.env.PORT || 4000;
